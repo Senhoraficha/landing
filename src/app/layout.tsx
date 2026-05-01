@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { WaitlistProvider } from "@/context/WaitlistContext";
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: ["400"],
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${dmSerifDisplay.variable} ${plusJakartaSans.variable}`}>
-      <body>{children}</body>
+      <body><WaitlistProvider>{children}</WaitlistProvider></body>
     </html>
   );
 }

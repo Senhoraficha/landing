@@ -1,6 +1,9 @@
-import WaitlistForm from "./WaitlistForm";
+"use client";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function Hero() {
+  const { open } = useWaitlist();
+
   return (
     <section className="hero" id="lista">
       <div className="hero-badge">
@@ -18,7 +21,12 @@ export default function Hero() {
         A Senhora Ficha vai mudar isso.
       </p>
 
-      <WaitlistForm />
+      <div className="hero-form-wrap" style={{ marginBottom: 14 }}>
+        <button className="hero-btn" style={{ height: 52, padding: "0 32px", fontSize: 16 }} onClick={open}>
+          Quero ser dos primeiros
+        </button>
+      </div>
+      <p className="hero-hint">Gratuito durante o beta. Sem cartão de crédito.</p>
 
       <div className="social-proof">
         <div className="avatars">

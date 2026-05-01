@@ -1,9 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+  const { open } = useWaitlist();
   return (
     <nav className="nav">
       <a className="nav-logo" href="#">
@@ -18,18 +17,14 @@ export default function Nav() {
         </div>
         <span className="nav-logo-text">Senhora Ficha</span>
       </a>
-
       <div className="nav-links">
         <a className="nav-link" href="#como">Como funciona</a>
         <a className="nav-link" href="#features">Funcionalidades</a>
         <a className="nav-link" href="#quem">Para quem</a>
       </div>
-
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <button className="nav-login">Já tenho acesso</button>
-        <a href="#lista">
-          <button className="nav-cta">Entrar na lista</button>
-        </a>
+        <button className="nav-cta" onClick={open}>Entrar na lista</button>
       </div>
     </nav>
   );
