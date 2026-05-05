@@ -24,10 +24,8 @@ export default function Nav() {
         <a className="nav-link" href="#quem">Para quem</a>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <a href={APP_URL} className="nav-login" style={{ textDecoration: "none" }}>Entrar</a>
-        <a href={APP_URL} style={{ textDecoration: "none" }}>
-          <button className="nav-cta">Criar conta grátis</button>
-        </a>
+        <a href={APP_URL} className="btn btn-link btn-quiet">Entrar</a>
+        <a href={APP_URL} className="btn btn-primary btn-loud btn-sm">Criar conta grátis</a>
       </div>
     </nav>
   );

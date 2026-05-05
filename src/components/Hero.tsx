@@ -14,9 +14,7 @@ export default function Hero() {
       </div>
 
       <h1 className="hero-h1">
-        Saiba o <em>custo real</em> de cada prato<br />
-        em 5 minutos — e pare de perder<br />
-        <strong>dinheiro sem perceber.</strong>
+        Saiba o <em>custo real</em> de cada prato em 5 minutos — e pare de perder <strong>dinheiro sem perceber.</strong>
       </h1>
       <p className="hero-sub">
         Fichas técnicas, CMV e preço de venda automáticos.
@@ -24,23 +22,10 @@ export default function Hero() {
       </p>
 
       <div className="hero-form-wrap" style={{ marginBottom: 14, gap: 12 }}>
-        <a
-          href={APP_URL}
-          className="hero-btn"
-          style={{ height: 52, padding: "0 32px", fontSize: 16, display: "inline-flex", alignItems: "center", textDecoration: "none" }}
-        >
+        <a href={APP_URL} className="btn btn-primary btn-loud btn-lg">
           Criar conta grátis
         </a>
-        <a
-          href="#pricing"
-          style={{
-            height: 52, padding: "0 24px", fontSize: 15, fontWeight: 600,
-            display: "inline-flex", alignItems: "center", textDecoration: "none",
-            color: "var(--green-dark)", background: "transparent",
-            border: "1.5px solid var(--cream-border)", borderRadius: "var(--radius-sm)",
-            transition: "border-color .15s",
-          }}
-        >
+        <a href="#pricing" className="btn btn-secondary btn-ghost btn-lg">
           Ver planos
         </a>
       </div>

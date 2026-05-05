@@ -43,6 +43,112 @@ body {
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
+/* ─── BUTTON SYSTEM ─────────────────────────────────────
+   Usage: btn btn-{primary|secondary|link} btn-{loud|quiet|ghost}
+          [btn-lg|btn-sm] [btn-block] [btn-on-dark]
+
+   Primary  = pink  — ações de conversão ("Criar conta", "Assinar")
+   Secondary = green/neutral — ações de suporte ("Ver planos", "Saiba mais")
+   Link      = text only — navegação ("Entrar", links internos)
+
+   Loud      = preenchido + sombra  (máximo peso visual)
+   Quiet     = preenchido sem sombra (peso médio)
+   Ghost     = transparente + borda (peso mínimo)
+
+   btn-on-dark inverte cores para fundos escuros (seções verdes/escuras)
+────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s, transform .1s, box-shadow .15s;
+}
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:disabled, .btn[disabled] { opacity: .5; cursor: not-allowed; transform: none !important; }
+
+.btn-lg { height: 52px; padding: 0 32px; font-size: 16px; }
+.btn-sm { height: 36px; padding: 0 18px; font-size: 14px; }
+.btn-block { width: 100%; }
+
+/* ── Primary (pink) ── */
+.btn-primary.btn-loud {
+  background: var(--pink); border-color: var(--pink); color: #fff;
+  box-shadow: 0 4px 16px rgba(218,39,118,.28);
+}
+.btn-primary.btn-loud:hover { background: #B01F63; border-color: #B01F63; }
+
+.btn-primary.btn-quiet {
+  background: var(--pink-light); border-color: var(--pink-border); color: var(--pink);
+}
+.btn-primary.btn-quiet:hover { background: #F5D0E2; border-color: #EAA8C0; }
+
+.btn-primary.btn-ghost {
+  background: transparent; border-color: var(--pink); color: var(--pink);
+}
+.btn-primary.btn-ghost:hover { background: var(--pink-light); }
+
+/* ── Secondary (green-dark / neutral) ── */
+.btn-secondary.btn-loud {
+  background: var(--green-dark); border-color: var(--green-dark); color: #fff;
+}
+.btn-secondary.btn-loud:hover { background: #083829; border-color: #083829; }
+
+.btn-secondary.btn-quiet {
+  background: var(--cream-border); border-color: var(--cream-border); color: var(--green-dark);
+}
+.btn-secondary.btn-quiet:hover { background: #DDD9D0; border-color: #DDD9D0; }
+
+.btn-secondary.btn-ghost {
+  background: transparent; border-color: var(--cream-border); color: var(--green-dark);
+}
+.btn-secondary.btn-ghost:hover { border-color: var(--green-dark); background: var(--cream); }
+
+/* ── On-dark context (seções com fundo verde-escuro) ── */
+.btn-on-dark.btn-primary.btn-loud {
+  background: #fff; border-color: #fff; color: var(--green-dark);
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+.btn-on-dark.btn-primary.btn-loud:hover { background: #F0FCF7; border-color: #F0FCF7; }
+
+.btn-on-dark.btn-secondary.btn-ghost {
+  border-color: rgba(159,225,203,.35); color: rgba(159,225,203,.9);
+}
+.btn-on-dark.btn-secondary.btn-ghost:hover {
+  border-color: rgba(159,225,203,.65); background: rgba(255,255,255,.07);
+}
+
+/* ── Text link ── */
+.btn-link {
+  background: transparent; border-color: transparent;
+  padding: 0 4px; height: auto;
+}
+.btn-link.btn-loud {
+  color: var(--green-dark); font-weight: 700;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.btn-link.btn-loud:hover { opacity: .75; }
+
+.btn-link.btn-quiet { color: var(--muted); font-weight: 500; }
+.btn-link.btn-quiet:hover { color: var(--green-dark); transform: none; }
+
+.btn-link.btn-ghost { color: var(--muted); font-weight: 500; font-size: 13px; }
+.btn-link.btn-ghost:hover { color: var(--ink); transform: none; }
+
+.btn-on-dark.btn-link.btn-quiet { color: rgba(159,225,203,.65); }
+.btn-on-dark.btn-link.btn-quiet:hover { color: var(--green-muted); transform: none; }
+
 /* ─── NAV ─────────────────────────────────────────────── */
 .nav {
   position: sticky; top: 0; z-index: 100;
@@ -64,14 +170,7 @@ body {
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-link { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .15s; }
 .nav-link:hover { color: var(--green-dark); }
-.nav-cta {
-  background: var(--green-dark); color: #fff; border: none;
-  border-radius: var(--radius-sm); padding: 9px 20px;
-  font-size: 14px; font-weight: 700; font-family: var(--font-body);
-  cursor: pointer; transition: background .15s, transform .1s;
-}
-.nav-cta:hover { background: #083829; transform: translateY(-1px); }
-.nav-login { font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; background: none; border: none; font-family: var(--font-body); }
+/* nav buttons → ver .btn system acima */
 
 /* ─── HERO ─────────────────────────────────────────────── */
 .hero {
@@ -102,6 +201,7 @@ body {
   color: var(--green-dark);
   max-width: 700px;
   margin: 0 auto 20px;
+  text-wrap: balance;
   animation: fadeUp .55s .08s ease both;
 }
 .hero-h1 em { color: var(--pink); font-style: italic; }
@@ -128,17 +228,7 @@ body {
 }
 .hero-input:focus { border-color: var(--green-mid); }
 .hero-input::placeholder { color: #B4B2A9; }
-.hero-btn {
-  height: 52px; padding: 0 26px;
-  background: var(--pink); color: #fff;
-  border: none; border-radius: var(--radius-sm);
-  font-size: 15px; font-weight: 700; font-family: var(--font-body);
-  cursor: pointer; white-space: nowrap;
-  transition: background .15s, transform .1s;
-  box-shadow: 0 4px 16px rgba(218,39,118,.3);
-}
-.hero-btn:hover { background: #B01F63; transform: translateY(-1px); }
-.hero-btn:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+/* hero-btn → ver .btn system acima */
 .hero-hint {
   font-size: 12px; color: #9E9C94;
   animation: fadeUp .55s .26s ease both;
@@ -482,7 +572,7 @@ footer {
 .modal-sub { font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
 .modal-field { margin-bottom: 12px; }
 .modal-label { display: block; font-size: 13px; font-weight: 600; color: var(--green-dark); margin-bottom: 6px; }
-.modal-submit { width: 100%; height: 52px; font-size: 15px; margin-top: 4px; }
+.modal-submit { margin-top: 4px; }
 .modal-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: 16px; line-height: 1.6; }
 .modal-hint strong { color: var(--green-dark); }
 .modal-success { text-align: center; padding: 8px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -579,29 +669,12 @@ footer {
   flex-shrink: 0; margin-top: 1px;
 }
 .plan-card.highlighted .plan-feature-icon { background: rgba(255,255,255,.15); color: var(--green-muted); }
-.plan-btn {
-  display: block; width: 100%; height: 48px;
-  border-radius: var(--radius-sm); border: none;
-  font-size: 15px; font-weight: 700; font-family: var(--font-body);
-  cursor: pointer; text-align: center; text-decoration: none;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s, transform .1s;
-}
-.plan-btn:hover { transform: translateY(-1px); }
-.plan-btn-free {
-  background: var(--cream-border); color: var(--green-dark);
-}
-.plan-btn-free:hover { background: #DDD9D0; }
-.plan-btn-paid {
-  background: var(--pink); color: #fff;
-  box-shadow: 0 4px 16px rgba(218,39,118,.25);
-}
-.plan-btn-paid:hover { background: #B01F63; }
-.plan-card.highlighted .plan-btn-paid {
-  background: #fff; color: var(--green-dark);
+/* plan buttons → .btn system; override para card destacado: */
+.plan-card.highlighted .btn-primary.btn-loud {
+  background: #fff; border-color: #fff; color: var(--green-dark);
   box-shadow: 0 4px 16px rgba(0,0,0,.15);
 }
-.plan-card.highlighted .plan-btn-paid:hover { background: #F0FCF7; }
+.plan-card.highlighted .btn-primary.btn-loud:hover { background: #F0FCF7; border-color: #F0FCF7; }
 
 /* Accordion full comparison */
 .plans-accordion {

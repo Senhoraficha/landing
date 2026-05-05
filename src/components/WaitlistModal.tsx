@@ -49,7 +49,7 @@ export default function WaitlistModal({ onClose }: { onClose: () => void }) {
             <div className="modal-success-icon">🎉</div>
             <h3 className="modal-success-title">Você está na lista!</h3>
             <p className="modal-success-sub">Avisaremos no seu e-mail quando o beta abrir. Acesso gratuito garantido.</p>
-            <button className="hero-btn" style={{ marginTop: 8 }} onClick={onClose}>Fechar</button>
+            <button className="btn btn-secondary btn-quiet" style={{ marginTop: 8 }} onClick={onClose}>Fechar</button>
           </div>
         ) : (
           <>
@@ -74,7 +74,7 @@ export default function WaitlistModal({ onClose }: { onClose: () => void }) {
                   autoFocus
                 />
               </div>
-              <button className="hero-btn modal-submit" type="submit" disabled={status === "loading"}>
+              <button className="btn btn-primary btn-loud btn-lg btn-block modal-submit" type="submit" disabled={status === "loading"}>
                 {status === "loading" ? "Aguarde…" : "Garantir meu acesso gratuito"}
               </button>
               {status === "error" && <p className="form-error">{errorMsg}</p>}
