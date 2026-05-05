@@ -1,32 +1,50 @@
 "use client";
 import { useWaitlist } from "@/context/WaitlistContext";
 
+const APP_URL = "https://app.senhoraficha.com.br"; // TODO: atualizar com URL real
+
 export default function Hero() {
   const { open } = useWaitlist();
 
   return (
-    <section className="hero" id="lista">
+    <section className="hero" id="inicio">
       <div className="hero-badge">
         <div className="badge-pulse" />
-        Beta em breve · vagas limitadas
+        Plano grátis disponível · sem cartão
       </div>
 
       <h1 className="hero-h1">
-        Você sabe o <em>custo real</em>
-        <br />
-        de cada prato do seu <strong>cardápio?</strong>
+        Saiba o <em>custo real</em> de cada prato<br />
+        em 5 minutos — e pare de perder<br />
+        <strong>dinheiro sem perceber.</strong>
       </h1>
       <p className="hero-sub">
-        A maioria dos restauranteiros precifica no feeling — e perde margem sem perceber.
-        A Senhora Ficha vai mudar isso.
+        Fichas técnicas, CMV e preço de venda automáticos.
+        Sem planilha, sem fórmula, sem complicação.
       </p>
 
-      <div className="hero-form-wrap" style={{ marginBottom: 14 }}>
-        <button className="hero-btn" style={{ height: 52, padding: "0 32px", fontSize: 16 }} onClick={open}>
-          Quero ser dos primeiros
-        </button>
+      <div className="hero-form-wrap" style={{ marginBottom: 14, gap: 12 }}>
+        <a
+          href={APP_URL}
+          className="hero-btn"
+          style={{ height: 52, padding: "0 32px", fontSize: 16, display: "inline-flex", alignItems: "center", textDecoration: "none" }}
+        >
+          Criar conta grátis
+        </a>
+        <a
+          href="#pricing"
+          style={{
+            height: 52, padding: "0 24px", fontSize: 15, fontWeight: 600,
+            display: "inline-flex", alignItems: "center", textDecoration: "none",
+            color: "var(--green-dark)", background: "transparent",
+            border: "1.5px solid var(--cream-border)", borderRadius: "var(--radius-sm)",
+            transition: "border-color .15s",
+          }}
+        >
+          Ver planos
+        </a>
       </div>
-      <p className="hero-hint">Gratuito durante o beta. Sem cartão de crédito.</p>
+      <p className="hero-hint">Gratuito para sempre no plano básico. Sem cartão de crédito.</p>
 
       <div className="social-proof">
         <div className="avatars">
@@ -35,7 +53,7 @@ export default function Hero() {
           <div className="av" style={{ background: "#F3E8FD", color: "#9133EA", marginLeft: -8 }}>JP</div>
           <div className="av" style={{ background: "#FAEEDA", color: "#854F0B", marginLeft: -8 }}>LF</div>
         </div>
-        <span className="sp-text"><strong>247 profissionais</strong> já na lista de espera</span>
+        <span className="sp-text"><strong>247 profissionais</strong> já usando a plataforma</span>
       </div>
 
       <div className="hero-mockup-wrap">
@@ -63,58 +81,36 @@ export default function Hero() {
                 <div className="mock-btn-sm">+ Nova Ficha</div>
               </div>
               <div className="mock-stats">
-                <div className="mock-stat">
-                  <div className="mock-stat-label">Fichas Ativas</div>
-                  <div className="mock-stat-value">24</div>
-                  <div className="mock-stat-sub">↑ 4 este mês</div>
-                </div>
-                <div className="mock-stat">
-                  <div className="mock-stat-label">CMV Médio</div>
-                  <div className="mock-stat-value">28%</div>
-                  <div className="mock-stat-sub" style={{ color: "#DA2776" }}>Meta: 30%</div>
-                </div>
-                <div className="mock-stat">
-                  <div className="mock-stat-label">Margem Média</div>
-                  <div className="mock-stat-value">72%</div>
-                  <div className="mock-stat-sub">↑ 6% este mês</div>
-                </div>
-                <div className="mock-stat">
-                  <div className="mock-stat-label">Ingredientes</div>
-                  <div className="mock-stat-value">87</div>
-                  <div className="mock-stat-sub">3 com alta recente</div>
-                </div>
+                {[
+                  { label: "Fichas Ativas", value: "24", sub: "↑ 4 este mês", subColor: "var(--green-mid)" },
+                  { label: "CMV Médio", value: "28%", sub: "Meta: 30%", subColor: "#DA2776" },
+                  { label: "Margem Média", value: "72%", sub: "↑ 6% este mês", subColor: "var(--green-mid)" },
+                  { label: "Ingredientes", value: "87", sub: "3 com alta recente", subColor: "var(--green-mid)" },
+                ].map((s) => (
+                  <div key={s.label} className="mock-stat">
+                    <div className="mock-stat-label">{s.label}</div>
+                    <div className="mock-stat-value">{s.value}</div>
+                    <div className="mock-stat-sub" style={{ color: s.subColor }}>{s.sub}</div>
+                  </div>
+                ))}
               </div>
               <div className="mock-cards">
-                <div className="mock-card">
-                  <div className="mock-card-header">
-                    <div className="mock-card-title">Frango ao Molho</div>
-                    <div className="mock-tag tag-green">Lucro alto</div>
+                {[
+                  { name: "Frango ao Molho", tag: "Lucro alto", tagClass: "tag-green", cost: "R$ 8,42", price: "R$ 32,00", cmv: "26%", cmvColor: "#0F6E56", barW: "26%", barColor: "var(--green-mid)" },
+                  { name: "Bolo de Cenoura", tag: "Revisar preço", tagClass: "tag-pink", cost: "R$ 14,80", price: "R$ 38,00", cmv: "39%", cmvColor: "#DA2776", barW: "39%", barColor: "#DA2776" },
+                  { name: "Marmita Fitness", tag: "Ok", tagClass: "tag-amber", cost: "R$ 9,10", price: "R$ 29,90", cmv: "30%", cmvColor: "#854F0B", barW: "30%", barColor: "#F59E0B" },
+                ].map((c) => (
+                  <div key={c.name} className="mock-card">
+                    <div className="mock-card-header">
+                      <div className="mock-card-title">{c.name}</div>
+                      <div className={`mock-tag ${c.tagClass}`}>{c.tag}</div>
+                    </div>
+                    <div className="mock-card-row"><span>Custo total</span><strong>{c.cost}</strong></div>
+                    <div className="mock-card-row"><span>Preço de venda</span><strong>{c.price}</strong></div>
+                    <div className="mock-card-row"><span>CMV</span><strong style={{ color: c.cmvColor }}>{c.cmv}</strong></div>
+                    <div className="mock-bar-wrap"><div className="mock-bar" style={{ width: c.barW, background: c.barColor }} /></div>
                   </div>
-                  <div className="mock-card-row"><span>Custo total</span><strong>R$ 8,42</strong></div>
-                  <div className="mock-card-row"><span>Preço de venda</span><strong>R$ 32,00</strong></div>
-                  <div className="mock-card-row"><span>CMV</span><strong style={{ color: "#0F6E56" }}>26%</strong></div>
-                  <div className="mock-bar-wrap"><div className="mock-bar" style={{ width: "26%", background: "var(--green-mid)" }} /></div>
-                </div>
-                <div className="mock-card">
-                  <div className="mock-card-header">
-                    <div className="mock-card-title">Bolo de Cenoura</div>
-                    <div className="mock-tag tag-pink">Revisar preço</div>
-                  </div>
-                  <div className="mock-card-row"><span>Custo total</span><strong>R$ 14,80</strong></div>
-                  <div className="mock-card-row"><span>Preço de venda</span><strong>R$ 38,00</strong></div>
-                  <div className="mock-card-row"><span>CMV</span><strong style={{ color: "#DA2776" }}>39%</strong></div>
-                  <div className="mock-bar-wrap"><div className="mock-bar" style={{ width: "39%", background: "#DA2776" }} /></div>
-                </div>
-                <div className="mock-card">
-                  <div className="mock-card-header">
-                    <div className="mock-card-title">Marmita Fitness</div>
-                    <div className="mock-tag tag-amber">Ok</div>
-                  </div>
-                  <div className="mock-card-row"><span>Custo total</span><strong>R$ 9,10</strong></div>
-                  <div className="mock-card-row"><span>Preço de venda</span><strong>R$ 29,90</strong></div>
-                  <div className="mock-card-row"><span>CMV</span><strong style={{ color: "#854F0B" }}>30%</strong></div>
-                  <div className="mock-bar-wrap"><div className="mock-bar" style={{ width: "30%", background: "#F59E0B" }} /></div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

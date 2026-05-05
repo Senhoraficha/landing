@@ -1,11 +1,11 @@
 "use client";
-import { useWaitlist } from "@/context/WaitlistContext";
+
+const APP_URL = "https://app.senhoraficha.com.br"; // TODO: atualizar com URL real
 
 export default function Nav() {
-  const { open } = useWaitlist();
   return (
     <nav className="nav">
-      <a className="nav-logo" href="#">
+      <a className="nav-logo" href="/">
         <div className="nav-logo-mark">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <rect x="2" y="1" width="14" height="16" rx="3" fill="rgba(255,255,255,.25)" />
@@ -20,11 +20,14 @@ export default function Nav() {
       <div className="nav-links">
         <a className="nav-link" href="#como">Como funciona</a>
         <a className="nav-link" href="#features">Funcionalidades</a>
+        <a className="nav-link" href="#pricing">Planos</a>
         <a className="nav-link" href="#quem">Para quem</a>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <button className="nav-login">Já tenho acesso</button>
-        <button className="nav-cta" onClick={open}>Entrar na lista</button>
+        <a href={APP_URL} className="nav-login" style={{ textDecoration: "none" }}>Entrar</a>
+        <a href={APP_URL} style={{ textDecoration: "none" }}>
+          <button className="nav-cta">Criar conta grátis</button>
+        </a>
       </div>
     </nav>
   );
